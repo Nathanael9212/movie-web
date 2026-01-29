@@ -1,5 +1,5 @@
 import { tmdbFetch } from "@/lib/tmdb";
-import { TrendingResponse } from "@/types/tmdb";
+import { MediaResponse } from "@/types/tmdb";
 import MediaCard from "@/components/media/MediaCard";
 import Link from "next/link";
 import { MOVIE_GENRES } from "@/constants/genres";
@@ -32,8 +32,8 @@ export default async function MoviesPage({
   }
 
   const [popular, topRated] = await Promise.all([
-    tmdbFetch<TrendingResponse>(popularQuery),
-    tmdbFetch<TrendingResponse>(topRatedQuery),
+    tmdbFetch<MediaResponse>(popularQuery),
+    tmdbFetch<MediaResponse>(topRatedQuery),
   ]);
 
   return (

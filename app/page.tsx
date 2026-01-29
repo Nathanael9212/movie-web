@@ -1,5 +1,5 @@
 import { tmdbFetch } from "@/lib/tmdb";
-import { TrendingResponse, MovieDetails } from "@/types/tmdb";
+import { TrendingResponse, MovieDetail } from "@/types/tmdb";
 import MediaCard from "@/components/media/MediaCard";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +13,7 @@ export default async function HomePage() {
 
   const featured = trending.results[0];
   const featuredDetails = featured
-    ? await tmdbFetch<MovieDetails>(
+    ? await tmdbFetch<MovieDetail>(  // ← GANTI INI (MovieDetails jadi MovieDetail)
         `/${featured.media_type}/${featured.id}?append_to_response=videos`
       )
     : null;
@@ -124,7 +124,7 @@ export default async function HomePage() {
                 <MediaCard
                   key={item.id}
                   media={item}
-                  mediaType={item.media_type as "movie" | "tv"}
+                  mediaType={(item.media_type || "movie") as "movie" | "tv"}
                 />
               ))}
             </div>
